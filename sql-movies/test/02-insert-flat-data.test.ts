@@ -23,30 +23,41 @@ import { escape } from "../src/utils";
 import { minutes } from "./utils";
 
 const insertActors = (actors: string[]) => {
-  return (`insert into actors (full_name) values` +
-    actors.map(actor => `('${escape(actor)}')`).join(","));
+  return (
+    `insert into actors (full_name) values` +
+    actors.map(actor => `('${escape(actor)}')`).join(",")
+  );
 };
 
 const insertKeywords = (keywords: string[]) => {
-  return (`insert into keywords (keyword) values` +
-    keywords.map(keyword => `('${escape(keyword)}')`).join(","));
+  return (
+    `insert into keywords (keyword) values` +
+    keywords.map(keyword => `('${escape(keyword)}')`).join(",")
+  );
 };
 const insertDirectors = (directors: string[]) => {
-  return (`insert into directors (full_name) values` +
-    directors.map((full_name) => `('${escape(full_name)}')`).join(","));
+  return (
+    `insert into directors (full_name) values` +
+    directors.map((full_name) => `('${escape(full_name)}')`).join(",")
+  );
 };
 
 const insertGenres = (genres: string[]) => {
-  return (`insert into genres (genre) values` +
-    genres.map((genre) => `('${escape(genre)}')`).join(","));
+  return (
+    `insert into genres (genre) values` +
+    genres.map((genre) => `('${escape(genre)}')`).join(",")
+  );
 };
 
 const insertProductionCompanies = (companies: string[]) => {
-  return (`insert into production_companies (company_name) values` +
-    companies.map((company_name) => `('${escape(company_name)}')`).join(","));
+  return (
+    `insert into production_companies (company_name) values` +
+    companies.map((company_name) => `('${escape(company_name)}')`).join(",")
+  );
 };
 const insertMovies = (movies: Movie[]) => {
-  return (`insert into movies (imdb_id, popularity, budget, budget_adjusted, revenue, revenue_adjusted, 
+  return (
+    `insert into movies (imdb_id, popularity, budget, budget_adjusted, revenue, revenue_adjusted, 
       original_title, homepage, tagline, overview, runtime, release_date) values` +
     movies.map((movie) => `(
       '${escape(movie.imdbId)}',
@@ -60,7 +71,8 @@ const insertMovies = (movies: Movie[]) => {
       '${escape(movie.tagline ? movie.tagline : "null")}',
       '${escape(movie.overview)}',
       '${escape(movie.runtime.toString())}',
-      '${escape(movie.releaseDate.toString())}')`).join(","));
+      '${escape(movie.releaseDate.toString())}')`).join(",")
+  );
 };
 
 describe("Insert Flat Data", () => {

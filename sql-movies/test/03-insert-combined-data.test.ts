@@ -11,12 +11,14 @@ import { Rating } from "../src/data/types";
 import { minutes } from "./utils";
 
 const insertRatings = (movieId: number, ratings: Rating[]) => {
-  return (`insert into movie_ratings (user_id, movie_id, rating, time_created) values` +
+  return (
+    `insert into movie_ratings (user_id, movie_id, rating, time_created) values` +
     ratings.map((rating) => `(
     '${rating.userId.toString()}',
     '${rating.imdbId}',
     '${rating.rating.toString()}',
-    '${rating.time_created}')`).join(","));
+    '${rating.time_created}')`).join(",")
+  );
 };
 
 describe("Insert Combined Data", () => {

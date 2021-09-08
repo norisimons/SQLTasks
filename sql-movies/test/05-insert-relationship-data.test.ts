@@ -32,40 +32,73 @@ const insertMovieGenres = (
   genres: string[],
   genreRows: GenreRow[]
 ): string => {
-  throw new Error(`todo`);
+  const result = genreRows.filter((genre) => genres.includes(genre.genre));
+  return (
+    `INSERT INTO movie_genres (movie_id, genre_id) VALUES` +
+    result.map((genre) => `('${movieId}','${genre.id}')`).join(",")
+  );
 };
+
 
 const insertMovieActors = (
   movieId: number,
   actors: string[],
   actorRows: ActorRow[]
 ): string => {
-  throw new Error(`todo`);
+  let result = actorRows.filter((actor) => actors.includes(actor.full_name));
+  return (
+    `INSERT INTO movie_actors (movie_id, actor_id) VALUES` +
+    result.map((actor) => `('${movieId}','${actor.id}')`).join(",")
+  );
 };
+
 
 const insertMovieDirectors = (
   movieId: number,
   directors: string[],
   directorRows: DirectorRow[]
 ): string => {
-  throw new Error(`todo`);
+  let result = directorRows.filter((director) =>
+    directors.includes(director.full_name)
+  );
+  return (
+    `INSERT INTO movie_directors (movie_id, director_id) VALUES` +
+    result.map((director) => `('${movieId}','${director.id}')`).join(",")
+  );
 };
+
 
 const insertMovieKeywords = (
   movieId: number,
   keywords: string[],
   keywordRows: KeywordRow[]
 ): string => {
-  throw new Error(`todo`);
+  let result = keywordRows.filter((keyword) =>
+    keywords.includes(keyword.keyword)
+  );
+  return (
+    `INSERT INTO movie_keywords (movie_id, keyword_id) VALUES` +
+    result.map((keyword) => `('${movieId}','${keyword.id}')`).join(",")
+  );
 };
+
 
 const insertMovieProductionCompanies = (
   movieId: number,
   productionCompanies: string[],
   productionCompanyRows: ProductionCompanyRow[]
 ): string => {
-  throw new Error(`todo`);
+  let result = productionCompanyRows.filter((productionCompany) =>
+    productionCompanies.includes(productionCompany.company_name)
+  );
+  return (
+    `INSERT INTO movie_production_companies (movie_id, company_id) VALUES` +
+    result
+      .map((productionCompany) => `('${movieId}','${productionCompany.id}')`)
+      .join(",")
+  );
 };
+
 
 describe("Insert Relationship Data", () => {
   let db: Database;
@@ -79,7 +112,7 @@ describe("Insert Relationship Data", () => {
     "should insert genre relationship data",
     async done => {
       const movies = await CsvLoader.movies();
-      const genreRows = (await db.selectMultipleRows(`todo`)) as GenreRow[];
+      const genreRows = (await db.selectMultipleRows(`select * from genres`)) as GenreRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
       for (const imdbId of Object.keys(moviesByImdbId)) {
@@ -92,7 +125,7 @@ describe("Insert Relationship Data", () => {
       }
 
       const count = await db.selectSingleRow(selectCount(MOVIE_GENRES));
-      expect(count.c).toBe(7141); 
+      expect(count.c).toBe(7141);
 
       const movie = await db.selectSingleRow(selectMovie("tt2908446"));
       expect(movie.original_title).toBe("Insurgent");
@@ -115,7 +148,7 @@ describe("Insert Relationship Data", () => {
     "should insert actor relationship data",
     async done => {
       const movies = await CsvLoader.movies();
-      const actorRows = (await db.selectMultipleRows(`todo`)) as ActorRow[];
+      const actorRows = (await db.selectMultipleRows(`select * from actors`)) as ActorRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
       for (const imdbId of Object.keys(moviesByImdbId)) {
@@ -154,7 +187,7 @@ describe("Insert Relationship Data", () => {
     async done => {
       const movies = await CsvLoader.movies();
       const directorRows = (await db.selectMultipleRows(
-        `todo`
+        `select * from directors`
       )) as DirectorRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
@@ -189,7 +222,9 @@ describe("Insert Relationship Data", () => {
     "should insert keyword relationship data",
     async done => {
       const movies = await CsvLoader.movies();
-      const keywordRows = (await db.selectMultipleRows(`todo`)) as KeywordRow[];
+      const keywordRows = (await db.selectMultipleRows
+        (`select * from keywords`)) as KeywordRow[];
+
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
       for (const imdbId of Object.keys(moviesByImdbId)) {
@@ -228,7 +263,7 @@ describe("Insert Relationship Data", () => {
     async done => {
       const movies = await CsvLoader.movies();
       const productionCompanyRows = (await db.selectMultipleRows(
-        `todo`
+        `select * from production_companies`
       )) as ProductionCompanyRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 

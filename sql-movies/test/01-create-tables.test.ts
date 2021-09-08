@@ -61,23 +61,17 @@ const CREATE_PRODUCTION_COMPANIES_TABLE = `CREATE TABLE ${PRODUCTION_COMPANIES}(
   company_name text not null
  );`;
 
-const CREATE_INDEX_MOVIES_RELEASE_DATE = `
-CREATE INDEX movies_release_date_idx ON ${MOVIES} (release_date);`;
+const CREATE_INDEX_MOVIES_RELEASE_DATE = `CREATE INDEX movies_release_date_idx ON ${MOVIES} (release_date);`;
 
-const CREATE_INDEX_MOVIE_RATINGS_TIME_CREATED = `
-CREATE INDEX movie_ratings_time_created_idx ON ${MOVIE_RATINGS} (time_created);`;
+const CREATE_INDEX_MOVIE_RATINGS_TIME_CREATED = `CREATE INDEX movie_ratings_time_created_idx ON ${MOVIE_RATINGS} (time_created);`;
 
-const CREATE_UNIQUE_INDEX_MOVIES_IMDB_ID = `
-CREATE UNIQUE INDEX movies_imdb_id_unq_idx ON ${MOVIES} (imdb_id);`;
+const CREATE_UNIQUE_INDEX_MOVIES_IMDB_ID = `CREATE UNIQUE INDEX movies_imdb_id_unq_idx ON ${MOVIES} (imdb_id);`;
 
-const CREATE_UNIQUE_INDEX_KEYWORDS_KEYWORD = `
-CREATE UNIQUE INDEX keywords_keyword_unq_idx ON ${KEYWORDS} (keyword);`;
+const CREATE_UNIQUE_INDEX_KEYWORDS_KEYWORD = `CREATE UNIQUE INDEX keywords_keyword_unq_idx ON ${KEYWORDS} (keyword);`;
 
-const CREATE_UNIQUE_INDEX_GENRES_GENRE = `
-CREATE UNIQUE INDEX genres_genre_unq_idx ON ${GENRES} (genre);`;
+const CREATE_UNIQUE_INDEX_GENRES_GENRE = `CREATE UNIQUE INDEX genres_genre_unq_idx ON ${GENRES} (genre);`;
 
-const CREATE_UNIQUE_INDEX_PRODUCTION_COMPANIES_COMPANY_NAME = `
-CREATE UNIQUE INDEX production_companies_company_name_unq_idx ON ${PRODUCTION_COMPANIES} (company_name);`;
+const CREATE_UNIQUE_INDEX_PRODUCTION_COMPANIES_COMPANY_NAME = `CREATE UNIQUE INDEX production_companies_company_name_unq_idx ON ${PRODUCTION_COMPANIES} (company_name);`;
 
 describe("Tables", () => {
   let db: Database;
