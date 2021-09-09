@@ -22,10 +22,10 @@ describe("Foreign Keys", () => {
     "should not be able delete genres if any movie is linked",
     async done => {
       const genreId = 5;
-      const query = `DELETE FROM genres WHERE id = ${genreId} `;
+      const query = `delete genre by id`;
       try {
         await db.delete(query);
-      } catch (e) { }
+      } catch (e) {}
 
       const row = await db.selectSingleRow(selectGenreById(genreId));
       expect(row).toBeDefined();
@@ -39,10 +39,10 @@ describe("Foreign Keys", () => {
     "should not be able delete director if any movie is linked",
     async done => {
       const directorId = 7;
-      const query = `DELETE FROM directors WHERE ${directorId} = id`;
+      const query = `delete director by id`;
       try {
         await db.delete(query);
-      } catch (e) { }
+      } catch (e) {}
 
       const row = await db.selectSingleRow(selectDirectorById(directorId));
       expect(row).toBeDefined();
@@ -56,10 +56,10 @@ describe("Foreign Keys", () => {
     "should not be able delete actor if any movie is linked",
     async done => {
       const actorId = 10;
-      const query = `DELETE FROM actors WHERE ${actorId} = id`;
+      const query = `delete actor by id`;
       try {
         await db.delete(query);
-      } catch (e) { }
+      } catch (e) {}
 
       const row = await db.selectSingleRow(selectActorById(actorId));
       expect(row).toBeDefined();
@@ -73,10 +73,10 @@ describe("Foreign Keys", () => {
     "should not be able delete keyword if any movie is linked",
     async done => {
       const keywordId = 12;
-      const query = `DELETE FROM keywords WHERE id = ${keywordId}`;
+      const query = `delete keyword by id`;
       try {
         await db.delete(query);
-      } catch (e) { }
+      } catch (e) {}
 
       const row = await db.selectSingleRow(selectKeywordById(keywordId));
       expect(row).toBeDefined();
@@ -90,10 +90,10 @@ describe("Foreign Keys", () => {
     "should not be able delete production company if any movie is linked",
     async done => {
       const companyId = 12;
-      const query = `DELETE FROM production_companies WHERE ${companyId} = id`;
+      const query = `delete production company by id`;
       try {
         await db.delete(query);
-      } catch (e) { }
+      } catch (e) {}
 
       const row = await db.selectSingleRow(
         selectProductionCompanyById(companyId)
@@ -109,10 +109,10 @@ describe("Foreign Keys", () => {
     "should not be able delete movie if there are any linked data present",
     async done => {
       const movieId = 100;
-      const query = `DELETE FROM movies WHERE ${movieId} = id `;
+      const query = `delete movie by id`;
       try {
         await db.delete(query);
-      } catch (e) { }
+      } catch (e) {}
 
       const row = await db.selectSingleRow(selectMovieById(movieId));
       expect(row).toBeDefined();
@@ -126,7 +126,7 @@ describe("Foreign Keys", () => {
     "should be able to delete movie",
     async done => {
       const movieId = 5915;
-      const query = `DELETE FROM movies WHERE ${movieId} = movies.id`;
+      const query = `delete movie by id and all data from all linked tables`;
 
       await db.delete(query);
 
