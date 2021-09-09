@@ -26,7 +26,7 @@ const CREATE_MOVIES_TABLE = `CREATE TABLE ${MOVIES}(
   runtime integer not null,
   release_date text not null,
   Primary Key(id)
-);`;
+)`;
 
 const CREATE_MOVIE_RATINGS_TABLE = `CREATE TABLE ${MOVIE_RATINGS}(
   user_id integer not null,
